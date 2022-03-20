@@ -34,7 +34,7 @@ const useStyle = makeStyles(theme => ({
 
 const EmptyChat = () => {
     const classes = useStyle();
-    const url = 'https://web.whatsapp.com/img/intro-connection-light_c98cc75f2aa905314d74375a975d2cf2.jpg';
+    const url = 'https://firebasestorage.googleapis.com/v0/b/mern-project-images.appspot.com/o/whatsapp.jpg?alt=media&token=819a1001-b723-44f3-b0ee-459a66a883f8';
 
     return (
         <Box className={classes.component}>
