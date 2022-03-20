@@ -114,7 +114,7 @@ const Messages = ({ person, conversation }) => {
                     ))
                 }
             </Box>
-            <Footer sendText={sendText} value={value} setValue={setValue} pickerVisible={pickerVisible} onEmojiClick={onEmojiClick} setPickerVisible={setPickerVisible}/>
+            <Footer sendText={sendText} person={person} value={value} setValue={setValue} pickerVisible={pickerVisible} onEmojiClick={onEmojiClick} setPickerVisible={setPickerVisible}/>
         </Box>
     )
 }

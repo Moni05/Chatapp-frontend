@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { EmojiEmotions, AttachFile, Mic } from '@material-ui/icons';
 import { Box, makeStyles, InputBase } from '@material-ui/core';
 import Picker from "emoji-picker-react";
-
+import { AuthContext } from '../../context/AuthProvider';
+import { red } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
     footer: {
@@ -24,6 +25,11 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#FFFFFF',
         width: 'calc(94% - 100px)'
     },
+    alert: {
+        color: '#ff0000',
+        textTransform: 'uppercase',
+        fontSize: '16px'
+    },
     inputRoot: {
         width: '100%'
     },
@@ -40,13 +46,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Footer = ({ sendText, value, setValue, pickerVisible, onEmojiClick, setPickerVisible }) => {
+const Footer = ({ sendText, value, setValue, pickerVisible, onEmojiClick, setPickerVisible, person }) => {
     const classes = useStyles();
-    
-    
 
+    const { activeUsers } = useContext(AuthContext);
+    
     return (
         <Box className={classes.footer}>
+            {activeUsers?.find(user => user.userId === person.googleId) ? 
+            <>
             {pickerVisible && (<Picker 
                   pickerStyle={{ position: "absolute", bottom: "60px" }}
                   onEmojiClick={onEmojiClick} />)}
@@ -58,7 +66,7 @@ const Footer = ({ sendText, value, setValue, pickerVisible, onEmojiClick, setPic
             {/* <EmojiEmotions /> */}
             <AttachFile className={classes.clipIcon} />
 
-            <Box className={classes.search}>
+            <Box className={classes.search}> 
                 <InputBase
                     placeholder="Type a message"
                     classes={{
@@ -71,8 +79,8 @@ const Footer = ({ sendText, value, setValue, pickerVisible, onEmojiClick, setPic
                     value={value}
                 />
             </Box>
-
             <Mic />
+        </> : <p className={classes.alert}>Cannot send message to offline user</p>}
         </Box>
     )
 }
